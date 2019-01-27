@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import com.example.demo.modal.Course;
 import com.example.demo.modal.Instructor;
+import com.example.demo.modal.dto.CourseDto;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -24,23 +25,35 @@ public class CourseRepository {
         courses.add(javaOne);
     }
 
-
     public List<Course> findAllClasses(){
         //链接数据库
         //返回数据库的信息
         return  courses;
     }
 
-    public List<Course> findAllCourse(String searchByCourseName){
-
-        return new ArrayList<Course>();
-    }
-
-    public List<Course> findCourseByName(String courseName) {
-        if(courseName.equals("Java_I")) {
-            return courses;
+    List<CourseDto> courseName = new ArrayList<>();
+    public List<CourseDto> findCourseNameDto() {
+        for (Course course :courses) {
+            CourseDto name = CourseDto.builder()
+                    .courseName(course.getClassName())
+                    .build();
+            courseName.add(name);
         }
-
-        return new ArrayList<Course>();
+        return courseName;
     }
+
+//
+//
+//    public List<Course> findAllCourse(String searchByCourseName){
+//
+//        return new ArrayList<Course>();
+//    }
+//
+//    public List<Course> findCourseByName(String courseName) {
+//        if(courseName.equals("Java_I")) {
+//            return courses;
+//        }
+//
+//        return new ArrayList<Course>();
+//    }
 }
